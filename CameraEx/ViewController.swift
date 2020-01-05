@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     var innerCamera: AVCaptureDevice?
     var currentDevice: AVCaptureDevice?
     //--出力
-    var photoOutput: AVCapturePhotoOutput?
+    var photoOutput: AVCaptureVideoDataOutput?
     //--表示レイヤ
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
@@ -36,13 +36,14 @@ class ViewController: UIViewController {
         captureSesion.startRunning()
     }
     
+    //--タップされたら画像を保存
     @IBAction func onTapShot(_ sender: Any) {
         let settings = AVCapturePhotoSettings()
         settings.flashMode = .off
-//        if var _:AVCaptureConnection = self.photoOutput?.connection(with: AVMediaType.video){
-//            UIImageWriteToSavedPhotosAlbum(self.imageView.image!, nil, nil, nil)
-//        }
-        self.photoOutput?.capturePhoto(with: settings, delegate: self as AVCapturePhotoCaptureDelegate)
+        if var _:AVCaptureConnection = self.photoOutput?.connection(with: AVMediaType.video){
+            let image = self.imageView.image!
+            UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
+        }
     }
 }
 
@@ -80,8 +81,17 @@ extension ViewController{
             captureSesion.addInput(captureDeviceInput)
             
             //--出力
-            photoOutput = AVCapturePhotoOutput()
-            photoOutput!.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])], completionHandler: nil)
+            photoOutput = AVCaptureVideoDataOutput()
+            photoOutput?.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+            
+            do{
+                try currentDevice?.lockForConfiguration()
+                currentDevice?.activeVideoMaxFrameDuration = CMTimeMake(value: 1, timescale: 60)
+                currentDevice?.unlockForConfiguration()
+            } catch {
+                print(error)
+            }
+            
             captureSesion.addOutput(photoOutput!)
         } catch {
             print(error)
@@ -102,13 +112,25 @@ extension ViewController{
 
 }
 
-//---カメラ画像デリゲート
-extension ViewController: AVCapturePhotoCaptureDelegate{
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        if let imageData = photo.fileDataRepresentation(){
-            let uiimage = UIImage(data:imageData)
-            print(imageData.count)
-            UIImageWriteToSavedPhotosAlbum(uiimage!, nil, nil, nil)
+//--
+extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
+    //--
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        let image:UIImage = captureImage(sampleBuffer: sampleBuffer)
+        
+        DispatchQueue.main.async {
+            self.imageView.image = image
         }
+    }
+}
+
+extension ViewController{
+    func captureImage(sampleBuffer:CMSampleBuffer) -> UIImage{
+        let imgbuf:CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+        let ciimg:CIImage = CIImage(cvPixelBuffer: imgbuf)
+        let cicontext = CIContext.init(options: nil)
+        let cgimg = cicontext.createCGImage(ciimg, from: ciimg.extent)!
+        
+        return UIImage.init(cgImage: cgimg)
     }
 }
