@@ -171,8 +171,6 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
         // CIImageからCGImageを生成
         let cgImage = ciContext.createCGImage(ciImage, from: ciImage.extent)!
         
-        let deviceOrientation = UIDevice.current.orientation
-        
         // UIImageにして返す
         return UIImage(cgImage: cgImage)
     }

@@ -13,6 +13,7 @@
 		9E3EAE8223C1A1B700004514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EAE8023C1A1B700004514 /* Main.storyboard */; };
 		9E3EAE8423C1A1B800004514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EAE8323C1A1B800004514 /* Assets.xcassets */; };
 		9E3EAE8723C1A1B800004514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EAE8523C1A1B800004514 /* LaunchScreen.storyboard */; };
+		9E70A66225BA3FEC00A18C5D /* NavigationControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70A66125BA3FEC00A18C5D /* NavigationControllerExt.swift */; };
 		9EE0CF0925B97B85003E1CB4 /* DeviceInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF0725B97B84003E1CB4 /* DeviceInfoCell.swift */; };
 		9EE0CF0A25B97B85003E1CB4 /* DeviceInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EE0CF0825B97B84003E1CB4 /* DeviceInfoCell.xib */; };
 		9EE0CF0F25B97BA4003E1CB4 /* DeviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF0E25B97BA4003E1CB4 /* DeviceListViewController.swift */; };
@@ -31,6 +32,7 @@
 		9E3EAE8323C1A1B800004514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E3EAE8623C1A1B800004514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E3EAE8823C1A1B800004514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E70A66125BA3FEC00A18C5D /* NavigationControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExt.swift; sourceTree = "<group>"; };
 		9EE0CF0725B97B84003E1CB4 /* DeviceInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoCell.swift; sourceTree = "<group>"; };
 		9EE0CF0825B97B84003E1CB4 /* DeviceInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceInfoCell.xib; sourceTree = "<group>"; };
 		9EE0CF0E25B97BA4003E1CB4 /* DeviceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				9E3EAE7A23C1A1B700004514 /* AppDelegate.swift */,
 				9E3EAE7C23C1A1B700004514 /* SceneDelegate.swift */,
 				9E3EAE7E23C1A1B700004514 /* ViewController.swift */,
+				9E70A66125BA3FEC00A18C5D /* NavigationControllerExt.swift */,
 				9E3EAE8023C1A1B700004514 /* Main.storyboard */,
 				9EE0CF1C25B98087003E1CB4 /* CameraViewController */,
 				9EE0CF1125B97C3E003E1CB4 /* DeviceListViewController */,
@@ -193,6 +196,7 @@
 				9EE0CF1A25B98079003E1CB4 /* CameraViewController.swift in Sources */,
 				9EE0CF0925B97B85003E1CB4 /* DeviceInfoCell.swift in Sources */,
 				9EE0CF1525B97C5E003E1CB4 /* DeviceListExt.swift in Sources */,
+				9E70A66225BA3FEC00A18C5D /* NavigationControllerExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

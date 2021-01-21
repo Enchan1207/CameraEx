@@ -21,38 +21,51 @@ class CameraViewController: UIViewController {
     private var isPrepared = false
     var currentBuffer: CMSampleBuffer?
     
+    let videoOutput = AVCaptureVideoDataOutput()
+    
     var device: AVCaptureDevice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 向き変更検知
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(onOrientationChanged(_:)),
-            name: UIDevice.orientationDidChangeNotification,
-            object: nil
-        )
         
         // デバイス設定
         self.setupDeviceIO()
         
         // レイヤ設定
         self.previewView.videoPreviewLayer.session = self.captureSession
-        self.previewView.videoPreviewLayer.connection?.videoOrientation = self.getVideoOrientation(UIDevice.current.orientation)
         
         print("Configured.")
         self.isPrepared = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.updateOrientation()
+        self.captureSession.startRunning()
+        print("Session start")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.captureSession.stopRunning()
+        print("Session stop")
+    }
+    
+    // TODO: not work
+    override var shouldAutorotate: Bool{
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.updateOrientation()
+    }
+    
     // デバイス構成
     func setupDeviceIO(){
+        // デバイスのフレームレートやらを設定
         guard let device = self.device else {return}
-        
-        guard let captureInput = try? AVCaptureDeviceInput(device: device) else{
-            fatalError("Can't attach input!")
-        }
-        
         do{
             try device.lockForConfiguration()
             if  let frameRateRange = device.activeFormat.videoSupportedFrameRateRanges.first{
@@ -66,29 +79,16 @@ class CameraViewController: UIViewController {
             print(error)
         }
         
+        // 入力構成
+        guard let captureInput = try? AVCaptureDeviceInput(device: device) else{
+            fatalError("Can't attach input!")
+        }
         self.captureSession.addInput(captureInput)
         
-        let videoOutput = AVCaptureVideoDataOutput()
-        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
-        self.captureSession.addOutput(videoOutput)
+        // 出力構成
+        self.videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        self.captureSession.addOutput(self.videoOutput)
     }
-    
-    @objc func onOrientationChanged(_ sender: Any){
-        self.previewView.videoPreviewLayer.connection?.videoOrientation = self.getVideoOrientation(UIDevice.current.orientation)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.captureSession.startRunning()
-        print("Session start")
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        self.captureSession.stopRunning()
-        print("Session stop")
-        
-        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
-    }
-    
     // サンプルバッファからCIImageを生成
     func createImageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> CIImage? {
         // イメージバッファを取得
@@ -121,8 +121,16 @@ class CameraViewController: UIViewController {
         }
     }
     
-    // UIDevice.orientation -> AVCaptureVideoOrientation
-    func getVideoOrientation(_ from: UIDeviceOrientation) -> AVCaptureVideoOrientation{
+    // videocaptureOutputの出力の向きを設定
+    func updateOrientation(){
+        guard let interfaceOrientation = self.view.window?.windowScene?.interfaceOrientation else {return}
+        let orientation = self.getVideoOrientation(interfaceOrientation)
+        
+        self.videoOutput.connection(with: .video)?.videoOrientation = orientation
+    }
+    
+    // UIInterfaceOrientation -> AVCaptureVideoOrientation
+    func getVideoOrientation(_ from: UIInterfaceOrientation) -> AVCaptureVideoOrientation{
         switch from {
         case .landscapeLeft:
             return .landscapeLeft
