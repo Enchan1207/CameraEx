@@ -55,9 +55,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j7i-5D-0Lw">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xja-5L-JKD" customClass="PreviewView" customModule="CameraEx" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bry-j6-ytW">
                                 <rect key="frame" x="0.0" y="567" width="375" height="100"/>
                                 <subviews>
@@ -85,23 +86,23 @@
                         <viewLayoutGuide key="safeArea" id="dcc-4e-OSz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Xja-5L-JKD" firstAttribute="trailing" secondItem="dcc-4e-OSz" secondAttribute="trailing" id="0Zg-Gq-tP9"/>
+                            <constraint firstItem="Xja-5L-JKD" firstAttribute="bottom" secondItem="dcc-4e-OSz" secondAttribute="bottom" id="0qZ-nG-Vaa"/>
                             <constraint firstItem="dcc-4e-OSz" firstAttribute="trailing" secondItem="Bry-j6-ytW" secondAttribute="trailing" id="FPZ-iR-mOl"/>
                             <constraint firstItem="dcc-4e-OSz" firstAttribute="bottom" secondItem="Bry-j6-ytW" secondAttribute="bottom" id="NuU-TV-zCX"/>
-                            <constraint firstItem="dcc-4e-OSz" firstAttribute="bottom" secondItem="j7i-5D-0Lw" secondAttribute="bottom" id="Pjt-G7-dK9"/>
-                            <constraint firstItem="j7i-5D-0Lw" firstAttribute="leading" secondItem="dcc-4e-OSz" secondAttribute="leading" id="Plq-aO-f5o"/>
-                            <constraint firstItem="j7i-5D-0Lw" firstAttribute="top" secondItem="dcc-4e-OSz" secondAttribute="top" id="Z2U-Se-ldf"/>
+                            <constraint firstItem="Xja-5L-JKD" firstAttribute="leading" secondItem="dcc-4e-OSz" secondAttribute="leading" id="fn2-KS-RA8"/>
                             <constraint firstItem="Bry-j6-ytW" firstAttribute="leading" secondItem="dcc-4e-OSz" secondAttribute="leading" id="tNH-5L-ei0"/>
-                            <constraint firstItem="dcc-4e-OSz" firstAttribute="trailing" secondItem="j7i-5D-0Lw" secondAttribute="trailing" id="vlv-4B-T2R"/>
+                            <constraint firstItem="Xja-5L-JKD" firstAttribute="top" secondItem="mtK-wa-hOw" secondAttribute="top" id="vEw-wF-kai"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EPK-3K-WYF"/>
                     <connections>
-                        <outlet property="cameraView" destination="j7i-5D-0Lw" id="Xe9-Ri-PJF"/>
+                        <outlet property="previewView" destination="Xja-5L-JKD" id="78j-OV-rh9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GXu-fY-ZBk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1973" y="93"/>
+            <point key="canvasLocation" x="1972" y="92.203898050974516"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="soj-QR-oaa">

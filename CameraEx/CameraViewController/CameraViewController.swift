@@ -11,36 +11,59 @@ import AVFoundation
 
 class CameraViewController: UIViewController {
 
-    @IBOutlet weak var cameraView: UIImageView!
+    @IBOutlet weak var previewView: PreviewView!
     
+    private let captureSession = AVCaptureSession()
     var device: AVCaptureDevice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.setupDeviceIO()
+        self.previewView.videoPreviewLayer.session = self.captureSession
+        print("Configured.")
+    }
+    
+    // デバイス構成
+    func setupDeviceIO(){
+        guard let device = self.device else {return}
+        
+        guard let captureInput = try? AVCaptureDeviceInput(device: device) else{
+            fatalError("Can't attach input!")
+        }
+        self.captureSession.addInput(captureInput)
+        
+        let photoOutput = AVCaptureVideoDataOutput()
+        do{
+            try device.lockForConfiguration()
+            if  let frameRateRange = device.activeFormat.videoSupportedFrameRateRanges.first{
+                
+                device.activeVideoMinFrameDuration = frameRateRange.maxFrameDuration
+                device.activeVideoMaxFrameDuration = frameRateRange.minFrameDuration
+                
+            }
+            device.unlockForConfiguration()
+        } catch {
+            print(error)
+        }
+        
+        self.captureSession.addOutput(photoOutput)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // TODO: セッション開始
+        self.captureSession.startRunning()
+        print("Session start")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        // TODO: セッション停止
+        self.captureSession.stopRunning()
+        print("Session stop")
     }
     
     @IBAction func onTapShutter(_ sender: Any) {
+        // TODO: シャッター
         
-    }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
 
 }
