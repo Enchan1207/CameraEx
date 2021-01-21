@@ -19,6 +19,7 @@
 		9EE0CF1525B97C5E003E1CB4 /* DeviceListExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF1425B97C5E003E1CB4 /* DeviceListExt.swift */; };
 		9EE0CF1A25B98079003E1CB4 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF1925B98079003E1CB4 /* CameraViewController.swift */; };
 		9EE0CF1F25B98F3A003E1CB4 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF1E25B98F3A003E1CB4 /* PreviewView.swift */; };
+		9EE0CF2425B999AC003E1CB4 /* CameraViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF2325B999AC003E1CB4 /* CameraViewControllerExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		9EE0CF1425B97C5E003E1CB4 /* DeviceListExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListExt.swift; sourceTree = "<group>"; };
 		9EE0CF1925B98079003E1CB4 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		9EE0CF1E25B98F3A003E1CB4 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		9EE0CF2325B999AC003E1CB4 /* CameraViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewControllerExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				9EE0CF1925B98079003E1CB4 /* CameraViewController.swift */,
+				9EE0CF2325B999AC003E1CB4 /* CameraViewControllerExt.swift */,
 				9EE0CF1E25B98F3A003E1CB4 /* PreviewView.swift */,
 			);
 			path = CameraViewController;
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EE0CF2425B999AC003E1CB4 /* CameraViewControllerExt.swift in Sources */,
 				9E3EAE7F23C1A1B700004514 /* ViewController.swift in Sources */,
 				9EE0CF1F25B98F3A003E1CB4 /* PreviewView.swift in Sources */,
 				9EE0CF0F25B97BA4003E1CB4 /* DeviceListViewController.swift in Sources */,

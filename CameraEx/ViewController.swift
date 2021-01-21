@@ -122,18 +122,33 @@ extension ViewController{
         // プレビューレイヤを初期化し、縦横比と向きを設定
         self.cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSesion)
         self.cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        self.cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+        self.cameraPreviewLayer?.connection?.videoOrientation = getVideoOrientation(UIDevice.current.orientation)
         
         // viewにpreviewlayerを設定
         self.cameraPreviewLayer?.frame = self.imageView.frame
         self.imageView.layer.insertSublayer(self.cameraPreviewLayer!, at: 0)
     }
     
+    // UIDevice.orientation -> AVCaptureVideoOrientation
+    func getVideoOrientation(_ from: UIDeviceOrientation) -> AVCaptureVideoOrientation{
+        switch from {
+        case .landscapeLeft:
+            return .landscapeLeft
+        case .landscapeRight:
+            return .landscapeRight
+        case .portrait:
+            return .portrait
+        case .portraitUpsideDown:
+            return .portraitUpsideDown
+        default:
+            return .portrait
+        }
+    }
 }
 
 //
-extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
-    //
+extension ViewController{
+    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         let image = captureImage(sampleBuffer: sampleBuffer)
         
@@ -143,7 +158,7 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
     }
 }
 
-extension ViewController{
+extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
     // バッファから画像を取得する
     func captureImage(sampleBuffer: CMSampleBuffer) -> UIImage?{
         // イメージバッファを取得
