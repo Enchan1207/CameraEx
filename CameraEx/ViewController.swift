@@ -159,6 +159,6 @@ extension ViewController{
         let deviceOrientation = UIDevice.current.orientation
         
         // UIImageにして返す
-        return UIImage(cgImage: cgImage, scale: 0, orientation: .right)
+        return UIImage(cgImage: cgImage)
     }
 }
