@@ -13,6 +13,11 @@
 		9E3EAE8223C1A1B700004514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EAE8023C1A1B700004514 /* Main.storyboard */; };
 		9E3EAE8423C1A1B800004514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EAE8323C1A1B800004514 /* Assets.xcassets */; };
 		9E3EAE8723C1A1B800004514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EAE8523C1A1B800004514 /* LaunchScreen.storyboard */; };
+		9EE0CF0925B97B85003E1CB4 /* DeviceInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF0725B97B84003E1CB4 /* DeviceInfoCell.swift */; };
+		9EE0CF0A25B97B85003E1CB4 /* DeviceInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EE0CF0825B97B84003E1CB4 /* DeviceInfoCell.xib */; };
+		9EE0CF0F25B97BA4003E1CB4 /* DeviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF0E25B97BA4003E1CB4 /* DeviceListViewController.swift */; };
+		9EE0CF1525B97C5E003E1CB4 /* DeviceListExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF1425B97C5E003E1CB4 /* DeviceListExt.swift */; };
+		9EE0CF1A25B98079003E1CB4 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE0CF1925B98079003E1CB4 /* CameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		9E3EAE8323C1A1B800004514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E3EAE8623C1A1B800004514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E3EAE8823C1A1B800004514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EE0CF0725B97B84003E1CB4 /* DeviceInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoCell.swift; sourceTree = "<group>"; };
+		9EE0CF0825B97B84003E1CB4 /* DeviceInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceInfoCell.xib; sourceTree = "<group>"; };
+		9EE0CF0E25B97BA4003E1CB4 /* DeviceListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListViewController.swift; sourceTree = "<group>"; };
+		9EE0CF1425B97C5E003E1CB4 /* DeviceListExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListExt.swift; sourceTree = "<group>"; };
+		9EE0CF1925B98079003E1CB4 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +70,40 @@
 				9E3EAE7C23C1A1B700004514 /* SceneDelegate.swift */,
 				9E3EAE7E23C1A1B700004514 /* ViewController.swift */,
 				9E3EAE8023C1A1B700004514 /* Main.storyboard */,
+				9EE0CF1C25B98087003E1CB4 /* CameraViewController */,
+				9EE0CF1125B97C3E003E1CB4 /* DeviceListViewController */,
 				9E3EAE8323C1A1B800004514 /* Assets.xcassets */,
 				9E3EAE8523C1A1B800004514 /* LaunchScreen.storyboard */,
 				9E3EAE8823C1A1B800004514 /* Info.plist */,
 			);
 			path = CameraEx;
+			sourceTree = "<group>";
+		};
+		9EE0CF0C25B97B88003E1CB4 /* DeviceInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				9EE0CF0725B97B84003E1CB4 /* DeviceInfoCell.swift */,
+				9EE0CF0825B97B84003E1CB4 /* DeviceInfoCell.xib */,
+			);
+			path = DeviceInfoCell;
+			sourceTree = "<group>";
+		};
+		9EE0CF1125B97C3E003E1CB4 /* DeviceListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9EE0CF0C25B97B88003E1CB4 /* DeviceInfoCell */,
+				9EE0CF0E25B97BA4003E1CB4 /* DeviceListViewController.swift */,
+				9EE0CF1425B97C5E003E1CB4 /* DeviceListExt.swift */,
+			);
+			path = DeviceListViewController;
+			sourceTree = "<group>";
+		};
+		9EE0CF1C25B98087003E1CB4 /* CameraViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9EE0CF1925B98079003E1CB4 /* CameraViewController.swift */,
+			);
+			path = CameraViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,6 +167,7 @@
 				9E3EAE8723C1A1B800004514 /* LaunchScreen.storyboard in Resources */,
 				9E3EAE8423C1A1B800004514 /* Assets.xcassets in Resources */,
 				9E3EAE8223C1A1B700004514 /* Main.storyboard in Resources */,
+				9EE0CF0A25B97B85003E1CB4 /* DeviceInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,8 +179,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E3EAE7F23C1A1B700004514 /* ViewController.swift in Sources */,
+				9EE0CF0F25B97BA4003E1CB4 /* DeviceListViewController.swift in Sources */,
 				9E3EAE7B23C1A1B700004514 /* AppDelegate.swift in Sources */,
 				9E3EAE7D23C1A1B700004514 /* SceneDelegate.swift in Sources */,
+				9EE0CF1A25B98079003E1CB4 /* CameraViewController.swift in Sources */,
+				9EE0CF0925B97B85003E1CB4 /* DeviceInfoCell.swift in Sources */,
+				9EE0CF1525B97C5E003E1CB4 /* DeviceListExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

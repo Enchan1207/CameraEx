@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeviceInfoCell" rowHeight="72" id="KGk-i7-Jjw" customClass="DeviceInfoCell" customModule="CameraEx" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6d1-Rt-3rY">
+                        <rect key="frame" x="10" y="21" width="30" height="30"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vfa-IB-IQO">
+                                <rect key="frame" x="0.0" y="0.5" width="30" height="28"/>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vfa-IB-IQO" firstAttribute="leading" secondItem="6d1-Rt-3rY" secondAttribute="leading" id="2CG-Fd-w3K"/>
+                            <constraint firstAttribute="bottom" secondItem="vfa-IB-IQO" secondAttribute="bottom" id="49D-BF-RnE"/>
+                            <constraint firstItem="vfa-IB-IQO" firstAttribute="top" secondItem="6d1-Rt-3rY" secondAttribute="top" id="910-Xd-Bws"/>
+                            <constraint firstAttribute="width" secondItem="6d1-Rt-3rY" secondAttribute="height" multiplier="1:1" id="Zdq-6C-YfA"/>
+                            <constraint firstAttribute="trailing" secondItem="vfa-IB-IQO" secondAttribute="trailing" id="fco-2O-Nft"/>
+                            <constraint firstAttribute="width" constant="30" id="sPk-I2-dYx"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIC-fV-yBp">
+                        <rect key="frame" x="50" y="25.5" width="260" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="bIC-fV-yBp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3ZU-p3-Jjj"/>
+                    <constraint firstItem="bIC-fV-yBp" firstAttribute="leading" secondItem="6d1-Rt-3rY" secondAttribute="trailing" constant="10" id="CUY-nI-YIS"/>
+                    <constraint firstItem="6d1-Rt-3rY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Cad-bG-9oN"/>
+                    <constraint firstAttribute="trailing" secondItem="bIC-fV-yBp" secondAttribute="trailing" constant="10" id="vHG-Pz-uP6"/>
+                    <constraint firstItem="6d1-Rt-3rY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="z1u-Bj-OTb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="infoIcon" destination="vfa-IB-IQO" id="Lpa-Ge-QTD"/>
+                <outlet property="infoStringLabel" destination="bIC-fV-yBp" id="XGB-5A-Q0C"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="76.339285714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
