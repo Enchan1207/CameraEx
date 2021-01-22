@@ -9,20 +9,6 @@
 import AVFoundation
 import UIKit
 
-extension CameraViewController: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.detectedObjects.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        let detectObjType = self.detectedObjects[indexPath.row].type.rawValue
-
-        cell.textLabel?.text = "\(detectObjType)"
-        return cell
-    }
-}
-
 extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
     
     // サンプルバッファの出力をもらっておく
@@ -37,11 +23,31 @@ extension CameraViewController: AVCaptureMetadataOutputObjectsDelegate{
     // 検出されたメタデータ
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
-        for object in metadataObjects{
-            self.detectedObjects.append(object)
-            if(self.detectedObjects.count > 10){
-                self.detectedObjects.remove(at: 0)
-            }
-        }
+        // サンプルを一つ取得
+        guard let object = metadataObjects.first else {return}
+        
+        // boundsとpreviewViewのframeからpreviewView上の位置を計算、設定
+        // metadataOutputはorientationを変更できないので、適宜座標軸を変更する必要がある
+        let bounds = object.bounds
+        let previewFrame = previewView.frame
+        
+        let startPoint = CGPoint(
+            x: (1 - bounds.maxY) * previewFrame.width,
+            y: bounds.minX * previewFrame.height
+        )
+        let endPoint = CGPoint(
+            x: (1 - bounds.minY) * previewFrame.width,
+            y: bounds.maxX * previewFrame.height
+        )
+        
+        let detectRect = CGRect(
+            x: startPoint.x,
+            y: startPoint.y,
+            width: endPoint.x - startPoint.x,
+            height: endPoint.y - startPoint.y
+        )
+        
+        self.detectView.frame = detectRect
+        
     }
 }

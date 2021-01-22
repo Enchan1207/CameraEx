@@ -14,18 +14,18 @@ import Photos
 class CameraViewController: UIViewController {
 
     @IBOutlet weak var previewView: PreviewView!
-    @IBOutlet weak var objectListView: UITableView!
+    @IBOutlet weak var positionLabel: UILabel!
     
-    var detectedObjects: [AVMetadataObject] = []
     private let context = CIContext()
     
     private let captureSession = AVCaptureSession()
     private var isPrepared = false
     var currentBuffer: CMSampleBuffer?
-    
+    let metaOutput = AVCaptureMetadataOutput()
     let videoOutput = AVCaptureVideoDataOutput()
-    
     var device: AVCaptureDevice?
+    
+    let detectView = UIView() // 検出範囲のUIView
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +36,14 @@ class CameraViewController: UIViewController {
         // レイヤ設定
         self.previewView.videoPreviewLayer.session = self.captureSession
         
-        // オブジェクトリストビュー設定
-        self.objectListView.dataSource = self
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(updateDetectionList), userInfo: nil, repeats: true)
+        // 検出範囲View設定
+        self.detectView.layer.borderWidth = 2
+        self.detectView.layer.borderColor = UIColor.red.cgColor
+        self.detectView.frame = .zero
+        self.previewView.addSubview(detectView)
         
         print("Configured.")
         self.isPrepared = true
-    }
-    
-    @objc func updateDetectionList(){
-        self.objectListView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,15 +91,14 @@ class CameraViewController: UIViewController {
         guard let captureInput = try? AVCaptureDeviceInput(device: device) else{
             fatalError("Can't attach input!")
         }
-        self.captureSession.addInput(captureInput)
+        captureSession.addInput(captureInput)
         
         // カメラ出力構成
-        self.videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
-        self.captureSession.addOutput(self.videoOutput)
+        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        captureSession.addOutput(videoOutput)
         
         // メタデータ出力構成
-        let metaOutput = AVCaptureMetadataOutput()
-        self.captureSession.addOutput(metaOutput)
+        captureSession.addOutput(metaOutput)
         metaOutput.rectOfInterest = CGRect(x: 0, y: 0, width: 1, height: 1)
         metaOutput.metadataObjectTypes = metaOutput.availableMetadataObjectTypes
         metaOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
