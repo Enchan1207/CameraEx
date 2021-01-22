@@ -14,7 +14,9 @@ import Photos
 class CameraViewController: UIViewController {
 
     @IBOutlet weak var previewView: PreviewView!
+    @IBOutlet weak var objectListView: UITableView!
     
+    var detectedObjects: [AVMetadataObject] = []
     private let context = CIContext()
     
     private let captureSession = AVCaptureSession()
@@ -34,8 +36,16 @@ class CameraViewController: UIViewController {
         // レイヤ設定
         self.previewView.videoPreviewLayer.session = self.captureSession
         
+        // オブジェクトリストビュー設定
+        self.objectListView.dataSource = self
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(updateDetectionList), userInfo: nil, repeats: true)
+        
         print("Configured.")
         self.isPrepared = true
+    }
+    
+    @objc func updateDetectionList(){
+        self.objectListView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,15 +89,22 @@ class CameraViewController: UIViewController {
             print(error)
         }
         
-        // 入力構成
+        // カメラ入力構成
         guard let captureInput = try? AVCaptureDeviceInput(device: device) else{
             fatalError("Can't attach input!")
         }
         self.captureSession.addInput(captureInput)
         
-        // 出力構成
+        // カメラ出力構成
         self.videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         self.captureSession.addOutput(self.videoOutput)
+        
+        // メタデータ出力構成
+        let metaOutput = AVCaptureMetadataOutput()
+        self.captureSession.addOutput(metaOutput)
+        metaOutput.rectOfInterest = CGRect(x: 0, y: 0, width: 1, height: 1)
+        metaOutput.metadataObjectTypes = metaOutput.availableMetadataObjectTypes
+        metaOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
     }
     // サンプルバッファからCIImageを生成
     func createImageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> CIImage? {

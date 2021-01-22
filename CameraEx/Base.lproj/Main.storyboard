@@ -59,7 +59,32 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bry-j6-ytW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m6D-2r-G9G" userLabel="Object List View">
+                                <rect key="frame" x="150" y="44" width="225" height="623"/>
+                                <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="LvQ-IG-Arq" style="IBUITableViewCellStyleDefault" id="GXL-xG-d3k">
+                                        <rect key="frame" x="0.0" y="28" width="225" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GXL-xG-d3k" id="16X-gz-Pu3">
+                                            <rect key="frame" x="0.0" y="0.0" width="225" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LvQ-IG-Arq">
+                                                    <rect key="frame" x="16" y="0.0" width="193" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bry-j6-ytW" userLabel="Button View">
                                 <rect key="frame" x="0.0" y="567" width="375" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rwz-DN-918">
@@ -88,8 +113,12 @@
                         <constraints>
                             <constraint firstItem="Xja-5L-JKD" firstAttribute="trailing" secondItem="dcc-4e-OSz" secondAttribute="trailing" id="0Zg-Gq-tP9"/>
                             <constraint firstItem="Xja-5L-JKD" firstAttribute="bottom" secondItem="dcc-4e-OSz" secondAttribute="bottom" id="0qZ-nG-Vaa"/>
+                            <constraint firstItem="m6D-2r-G9G" firstAttribute="trailing" secondItem="dcc-4e-OSz" secondAttribute="trailing" id="5WS-53-VTq"/>
                             <constraint firstItem="dcc-4e-OSz" firstAttribute="trailing" secondItem="Bry-j6-ytW" secondAttribute="trailing" id="FPZ-iR-mOl"/>
                             <constraint firstItem="dcc-4e-OSz" firstAttribute="bottom" secondItem="Bry-j6-ytW" secondAttribute="bottom" id="NuU-TV-zCX"/>
+                            <constraint firstItem="m6D-2r-G9G" firstAttribute="top" secondItem="dcc-4e-OSz" secondAttribute="top" id="SZj-Hj-xRQ"/>
+                            <constraint firstItem="dcc-4e-OSz" firstAttribute="bottom" secondItem="m6D-2r-G9G" secondAttribute="bottom" id="YLe-Lv-FPg"/>
+                            <constraint firstItem="m6D-2r-G9G" firstAttribute="width" secondItem="mtK-wa-hOw" secondAttribute="width" multiplier="0.6" id="dYe-wO-iEN"/>
                             <constraint firstItem="Xja-5L-JKD" firstAttribute="leading" secondItem="dcc-4e-OSz" secondAttribute="leading" id="fn2-KS-RA8"/>
                             <constraint firstItem="Bry-j6-ytW" firstAttribute="leading" secondItem="dcc-4e-OSz" secondAttribute="leading" id="tNH-5L-ei0"/>
                             <constraint firstItem="Xja-5L-JKD" firstAttribute="top" secondItem="mtK-wa-hOw" secondAttribute="top" id="vEw-wF-kai"/>
@@ -97,6 +126,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="EPK-3K-WYF"/>
                     <connections>
+                        <outlet property="objectListView" destination="m6D-2r-G9G" id="vGN-Bl-ga4"/>
                         <outlet property="previewView" destination="Xja-5L-JKD" id="78j-OV-rh9"/>
                     </connections>
                 </viewController>
