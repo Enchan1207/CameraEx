@@ -26,7 +26,7 @@ class CameraViewController: UIViewController {
     var device: AVCaptureDevice?
     
     let detectView = UIView() // 検出範囲のUIView
-    var detectedCodes: [String] = [] // 検出したバーコード
+    var detectedProducts: [Product] = [] // 検出したバーコード
     
     override func viewDidLoad() {
         super.viewDidLoad()

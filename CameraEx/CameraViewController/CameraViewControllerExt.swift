@@ -52,18 +52,31 @@ extension CameraViewController: AVCaptureMetadataOutputObjectsDelegate{
         guard let codeObject = sampledInstance as? AVMetadataMachineReadableCodeObject else {return}
         guard let barcodeValue = codeObject.stringValue else {return}
         
-        // 読み取ったことがなければ
-        if(!self.detectedCodes.contains(barcodeValue)){
-            self.detectedCodes.append(barcodeValue)
+        // 読み取り履歴から商品を探す
+        if let storedProduct = self.detectedProducts.filter({return $0.janCode == barcodeValue}).first {
+            self.positionLabel.text = storedProduct.name
+        }else{
+            print("New Product!")
             
-            // APIに投げる
-            let endPoint = "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch"
-            guard let response = try? Data(contentsOf: URL(string: "\(endPoint)?appid=\(YAHOO_API_CLIENT_ID)&jan_code=\(barcodeValue)")!) else {return}
-            guard let responseJson = try? JSON(data: response) else {return}
+            // 読み取り履歴の中になければAPIを叩いて
+            let productName = getProductNameFromJAN(janCode: barcodeValue) ?? "Unknown"
+            let newProduct = Product(name: productName, janCode: barcodeValue)
             
-            // labelに表示
-            let productName = responseJson["hits"][0]["name"].string
-            self.positionLabel.text = productName
+            // 履歴に追加
+            self.detectedProducts.append(newProduct)
+            
+            self.positionLabel.text = newProduct.name
         }
     }
+    
+    // 商品検索APIを叩く
+    func getProductNameFromJAN(janCode: String) -> String?{
+        // APIに投げて商品名を取得
+        let endPoint = "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch"
+        guard let response = try? Data(contentsOf: URL(string: "\(endPoint)?appid=\(YAHOO_API_CLIENT_ID)&jan_code=\(janCode)")!) else {return nil}
+        guard let responseJson = try? JSON(data: response) else {return nil}
+        let productName = responseJson["hits"][0]["name"].string
+        return productName
+    }
+    
 }
